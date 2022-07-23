@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.3", ">= 7.0.3.1"
 gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.4', '>= 1.4.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -41,6 +41,20 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+gem "faker"
+
+gem 'bootstrap', '~> 5.1', '>= 5.1.3'
+
+gem 'cowsay'
+
+gem 'jquery-rails'
+
+gem "pry-rails"
+
+gem "cancancan"
+
+gem "sassc-rails"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
