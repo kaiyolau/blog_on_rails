@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_post
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy]
 
 
 
@@ -18,11 +18,11 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find params[:id]
-    # if can?(:crud, @comment)
+     if can?(:crud, @comment)
       @comment.destroy
       redirect_to post_path(@post), notice: "Comment deleted"
-    # else
-    #   redirect_to root_path, alert: "Not authorized"
+     else
+      redirect_to root_path, alert: "Not authorized"
     end
   end
 
@@ -39,5 +39,9 @@ class CommentsController < ApplicationController
     @post = Post.find params[:post_id]
   end
 
+
+  def authorize_user!
+      redirect_to root_path, alert: "Not authorized!" unless can?(:crud, @product)
+  end
 
 end

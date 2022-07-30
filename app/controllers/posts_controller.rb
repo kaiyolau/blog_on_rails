@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   # =============CALLBACKS=====================
   before_action :find_post, only: [:edit, :update, :show, :destroy]
-  # before_action :authenticate_user!, except: [:index, :show]
-  # before_action :authorize_user!, only:[:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user!, only:[:edit, :update, :destroy]
 
 
 
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
     if @post.save
       flash[:notice]= "Question created successfully!"
       redirect_to post_path(@post)
@@ -33,6 +34,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @posts = Post.order(created_at: :desc)
     @comment = Comment.new
     @comments = @post.comments.order(created_at: :desc)
   end

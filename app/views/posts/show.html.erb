@@ -3,9 +3,10 @@
 <p><%= @post.body %></p>
 <p><small>Posted: <%= time_ago_in_words(@post.created_at) %> </small></p>
 
-<%= link_to 'Edit', edit_post_path(@post) %>
-<%= button_to 'Delete', post_path(@post), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }  %>
-
+  <% if can? :crud, @post  %>
+    <%= link_to 'Edit', edit_post_path(@post) %>
+    <%= button_to 'Delete', post_path(@post), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }  %>
+  <% end %>
 
 <h3>Comment</h3>
 
@@ -33,9 +34,9 @@
   <div>
     <%= comment.body %>
     <small>Commented <%= time_ago_in_words(comment.created_at) %> ago </small>
-     <%# if can? :crud, comment  %>
+     <% if can? :crud, comment  %>
       <%= button_to "Delete", post_comment_path(@post, comment), method: :delete,form: { data: { turbo_confirm: "Are you sure?" } } %>
-    <%# end %>
+    <% end %>
     <hr>
   </div>
 <% end %>

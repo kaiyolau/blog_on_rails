@@ -56,6 +56,10 @@ gem "cancancan"
 
 gem "sassc-rails"
 
+gem "bcrypt"
+
+gem "cancan"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
